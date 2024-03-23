@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="root" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.dep12.fx.media_player.controller.MainViewController">
+   <children>
+      <ImageView fitHeight="500.0" fitWidth="700.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../images/water-splash-2.png" />
+         </image>
+      </ImageView>
+      <Slider layoutX="80.0" layoutY="404.0" prefHeight="16.0" prefWidth="535.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#101011" height="344.0" layoutX="83.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="534.0" AnchorPane.bottomAnchor="106.0" AnchorPane.leftAnchor="83.0" AnchorPane.rightAnchor="83.0" />
+      <Button fx:id="btnPlay" layoutX="97.0" layoutY="441.0" mnemonicParsing="false" AnchorPane.bottomAnchor="14.0">
+         <graphic>
+            <ImageView fitHeight="37.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/play_6612880.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btnPause" layoutX="175.0" layoutY="441.0" mnemonicParsing="false" AnchorPane.bottomAnchor="14.0">
+         <graphic>
+            <ImageView fitHeight="37.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/pause_5251071.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btnStop" layoutX="257.0" layoutY="441.0" mnemonicParsing="false" AnchorPane.bottomAnchor="14.0">
+         <graphic>
+            <ImageView fitHeight="37.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/stop-button_9654598.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btnVolumeUp" layoutX="339.0" layoutY="441.0" mnemonicParsing="false" AnchorPane.bottomAnchor="14.0">
+         <graphic>
+            <ImageView fitHeight="37.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/sound_15060195.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btnVolumeDown" layoutX="423.0" layoutY="441.0" mnemonicParsing="false" AnchorPane.bottomAnchor="14.0">
+         <graphic>
+            <ImageView fitHeight="37.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/sound_15060171.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label fx:id="lblTime" layoutX="534.0" layoutY="444.0" text="Time Label" AnchorPane.bottomAnchor="16.0" AnchorPane.rightAnchor="55.0">
+         <font>
+            <Font name="Kalimati" size="22.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnMinimize" layoutX="631.0" layoutY="339.0" mnemonicParsing="false" AnchorPane.rightAnchor="14.0">
+         <graphic>
+            <ImageView fitHeight="37.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/minimize-icon-23776.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btnMaximize" layoutX="631.0" layoutY="282.0" mnemonicParsing="false" AnchorPane.rightAnchor="14.0">
+         <graphic>
+            <ImageView fitHeight="37.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/window-maximize-1.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btnClose" layoutX="631.0" layoutY="222.0" mnemonicParsing="false" onAction="#btnCloseOnAction" AnchorPane.rightAnchor="14.0">
+         <graphic>
+            <ImageView fitHeight="37.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/icons8-close-48.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>
