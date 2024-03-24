@@ -17,15 +17,11 @@ public class GameViewController {
     public Label lblGameWon;
     private boolean gameStopped;
 
-    private void displayGameWon() {
+    private void displayGameWonOrLost() {
         if (!gameStopped && lblBoy.getLayoutX() >= root.getPrefWidth()) {
             lblGameWon.setVisible(true);
             gameStopped = true;
-        }
-    }
-
-    private void displayLostGame() {
-        if (((lblDinasour.getLayoutX() <= lblBoy.getLayoutX() + 75) && (lblDinasour.getLayoutX() >= lblBoy.getLayoutX())) && (lblBoy.getLayoutY() + 120 >= lblDinasour.getLayoutY())) {
+        } else if (((lblDinasour.getLayoutX() <= lblBoy.getLayoutX() + 75) && (lblDinasour.getLayoutX() >= lblBoy.getLayoutX())) && (lblBoy.getLayoutY() + 120 >= lblDinasour.getLayoutY())) {
             lblGameOver.setVisible(true);
             gameStopped = true;
         }
@@ -45,8 +41,7 @@ public class GameViewController {
 
                                 else {
                                     lblDinasour.setLayoutX(lblDinasour.getLayoutX() - 5);
-                                    displayLostGame();
-                                    displayGameWon();
+                                    displayGameWonOrLost();
                                 }
                             }
                         }
