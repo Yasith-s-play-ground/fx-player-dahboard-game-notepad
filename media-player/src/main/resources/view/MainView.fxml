@@ -16,9 +16,9 @@
             <Image url="@../images/water-splash-2.png" />
          </image>
       </ImageView>
-      <Slider layoutX="80.0" layoutY="404.0" prefHeight="16.0" prefWidth="535.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" />
+      <Slider fx:id="sldrPlay" layoutX="80.0" layoutY="404.0" prefHeight="16.0" prefWidth="535.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#101011" height="344.0" layoutX="83.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="534.0" AnchorPane.bottomAnchor="106.0" AnchorPane.leftAnchor="83.0" AnchorPane.rightAnchor="83.0" />
-      <Button fx:id="btnPlay" layoutX="97.0" layoutY="441.0" mnemonicParsing="false" AnchorPane.bottomAnchor="14.0">
+      <Button fx:id="btnPlay" layoutX="97.0" layoutY="441.0" mnemonicParsing="false" onAction="#btnPlayOnAction" AnchorPane.bottomAnchor="14.0">
          <graphic>
             <ImageView fitHeight="37.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -27,7 +27,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="btnPause" layoutX="175.0" layoutY="441.0" mnemonicParsing="false" AnchorPane.bottomAnchor="14.0">
+      <Button fx:id="btnPause" layoutX="175.0" layoutY="441.0" mnemonicParsing="false" onAction="#btnPauseOnAction" AnchorPane.bottomAnchor="14.0">
          <graphic>
             <ImageView fitHeight="37.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -36,7 +36,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="btnStop" layoutX="257.0" layoutY="441.0" mnemonicParsing="false" AnchorPane.bottomAnchor="14.0">
+      <Button fx:id="btnStop" layoutX="257.0" layoutY="441.0" mnemonicParsing="false" onAction="#btnStopOnAction" AnchorPane.bottomAnchor="14.0">
          <graphic>
             <ImageView fitHeight="37.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -68,7 +68,7 @@
             <Font name="Kalimati" size="22.0" />
          </font>
       </Label>
-      <Button fx:id="btnMinimize" layoutX="631.0" layoutY="339.0" mnemonicParsing="false" AnchorPane.rightAnchor="14.0">
+      <Button fx:id="btnMinimize" layoutX="631.0" layoutY="339.0" mnemonicParsing="false" onAction="#btnMinimizeOnAction" AnchorPane.rightAnchor="14.0">
          <graphic>
             <ImageView fitHeight="37.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                <image>
