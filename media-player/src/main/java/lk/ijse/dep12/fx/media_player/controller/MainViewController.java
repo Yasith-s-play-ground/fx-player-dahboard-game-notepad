@@ -53,7 +53,6 @@ public class MainViewController {
 
     public void btnPlayOnAction(ActionEvent actionEvent) {
         isPlaying = true;
-        double startValue = sldrPlay.getValue();
         final Timeline timeline = new Timeline(
                 new KeyFrame(
                         Duration.millis(1000),
