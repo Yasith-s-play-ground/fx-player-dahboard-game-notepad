@@ -15,7 +15,8 @@ public class AppInitializer extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        primaryStage.setTitle("Notepad");
+        //primaryStage.setTitle("Notepad");
+        primaryStage.setTitle("Untitled Document 1");
         primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/MainView.fxml"))));
         primaryStage.show();
         primaryStage.centerOnScreen();
