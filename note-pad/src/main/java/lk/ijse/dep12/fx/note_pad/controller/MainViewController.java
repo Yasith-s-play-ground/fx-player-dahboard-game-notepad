@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -22,8 +23,10 @@ public class MainViewController {
     public MenuItem mnItemSave;
     public TextArea txtArea;
     public MenuItem mnItemSaveAs;
+    public MenuItem mnItemNew;
     //private File file = null;
     private File openedFile = null;
+    String originalText = null;
 
 
     public void mnItmAboutOnAction(ActionEvent actionEvent) throws IOException {
@@ -51,9 +54,15 @@ public class MainViewController {
         newWindowStage.show();
     }
 
+    private void setTitle(String title) {
+        ((Stage) root.getScene().getWindow()).setTitle(title);
+    }
+
     public void mnItemOpenOnAction(ActionEvent actionEvent) throws IOException {
         FileChooser fileChooser = new FileChooser(); // predefined class to access files
         fileChooser.setTitle("Open text files");
+        //set initial directory for file chooser
+        fileChooser.setInitialDirectory(new File(System.getenv("HOME"), "Desktop"));
         // for txt
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("text files", "*.txt"));
 
@@ -65,7 +74,7 @@ public class MainViewController {
             openedFile = file;
             ((Stage) root.getScene().getWindow()).setTitle(openedFile.getName());
         } else if (openedFile == null) {
-            ((Stage) root.getScene().getWindow()).setTitle("Untitled Document");
+            ((Stage) root.getScene().getWindow()).setTitle("Untitled Document 1");
         }
     }
 
@@ -79,9 +88,14 @@ public class MainViewController {
             }
         }
         txtArea.setText(text);
+        originalText = text;
     }
 
     private void saveTextFile(File file) throws IOException {
+//        if (!file.getName().endsWith(".txt")) {
+//            file = new File(file.getAbsolutePath(), ".txt");
+//        }
+//        if (!file.exists()) file.createNewFile();
         try (FileOutputStream fos = new FileOutputStream(file)) {
             char[] charArray = txtArea.getText().toCharArray();
             for (char c : charArray) {
@@ -89,7 +103,8 @@ public class MainViewController {
             }
         }
         openedFile = file;
-        ((Stage) root.getScene().getWindow()).setTitle(openedFile.getName());
+        setTitle(openedFile.getName());
+        //((Stage) root.getScene().getWindow()).setTitle(openedFile.getName());
     }
 
     public void mnItemSaveOnAction(ActionEvent actionEvent) throws IOException {
@@ -104,10 +119,26 @@ public class MainViewController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save text file");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("text file", "*.txt"));
-
+        //set initial directory for file chooser
+        fileChooser.setInitialDirectory(new File(System.getenv("HOME"), "Desktop"));
         File file = fileChooser.showSaveDialog(root.getScene().getWindow());
         if (file != null) {
             saveTextFile(file);
         }
+    }
+
+    public void txtAreaOnKeyReleased(KeyEvent keyEvent) {
+        if (!originalText.equals(txtArea.getText())) {
+            Stage window = ((Stage) root.getScene().getWindow());
+            if (!window.getTitle().startsWith("*")) window.setTitle("*" + window.getTitle());
+        }
+    }
+
+    public void mnItemNewOnAction(ActionEvent actionEvent) {
+        txtArea.clear();
+        txtArea.requestFocus();
+        setTitle("Untitled Document 1");
+        openedFile = null;
+        originalText = null;
     }
 }
