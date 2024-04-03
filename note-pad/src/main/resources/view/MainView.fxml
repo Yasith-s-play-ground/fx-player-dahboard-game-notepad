@@ -27,17 +27,17 @@
                         <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
-                  <MenuItem mnemonicParsing="false" text="Open">
+                  <MenuItem fx:id="mnItemOpen" mnemonicParsing="false" onAction="#mnItemOpenOnAction" text="Open">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
-                  <MenuItem mnemonicParsing="false" text="Save">
+                  <MenuItem fx:id="mnItemSave" mnemonicParsing="false" onAction="#mnItemSaveOnAction" text="Save">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
-                  <MenuItem mnemonicParsing="false" text="Save As...">
+                  <MenuItem fx:id="mnItemSaveAs" mnemonicParsing="false" onAction="#mnItemSaveAsOnAction" text="Save As...">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
                      </accelerator>
@@ -165,7 +165,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TextArea layoutY="28.0" prefHeight="571.0" prefWidth="800.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0" />
+      <TextArea fx:id="txtArea" layoutY="28.0" prefHeight="571.0" prefWidth="800.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0" />
       <AnchorPane layoutY="648.0" prefHeight="27.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
             <AnchorPane prefHeight="27.0" prefWidth="400.0" AnchorPane.rightAnchor="0.0">

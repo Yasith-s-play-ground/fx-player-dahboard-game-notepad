@@ -54,7 +54,7 @@ public class LoginViewController {
             mainStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/MainView.fxml"))));
             mainStage.show();
 
-            ((Stage) root.getScene().getWindow()).close();
+            ((Stage) root.getScene().getWindow()).close(); // closing login window
 
         } else {
             lblInvalidLoginText.setText("Invalid login details. Please Enter valid details!");
