@@ -212,7 +212,23 @@ public class MainViewController {
         openedFile = null;
     }
 
-    private void saveOnClosing() {
+//    private void saveOnClosing() {
+//        window.setOnCloseRequest(event -> {
+//            if (getWindowTitle().startsWith("*")) { // if there is unsaved data
+//                event.consume();
+//                displayClosingAlert(); // display closing alert to the user
+//            } else {
+//                window.close();
+//            }
+//        });
+//    }
+
+    public void mnItemExitOnAction(ActionEvent actionEvent) {
+        if (getWindowTitle().startsWith("*")) { // if there is unsaved data
+            displayClosingAlert(); // display closing alert to the user
+        } else {
+            window.close();
+        }
 
     }
 }

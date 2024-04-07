@@ -50,7 +50,7 @@
                      </accelerator>
                   </MenuItem>
                   <SeparatorMenuItem mnemonicParsing="false" />
-              <MenuItem mnemonicParsing="false" text="Exit" />
+              <MenuItem fx:id="mnItemExit" mnemonicParsing="false" onAction="#mnItemExitOnAction" text="Exit" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
