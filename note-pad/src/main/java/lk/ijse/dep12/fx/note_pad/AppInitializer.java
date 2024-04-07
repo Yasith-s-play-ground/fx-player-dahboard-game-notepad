@@ -24,17 +24,19 @@ public class AppInitializer extends Application {
     public void start(Stage primaryStage) throws IOException {
         primaryStage.setTitle("Untitled Document 1");
         URL resource = getClass().getResource("/view/MainView.fxml");
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        AnchorPane container = fxmlLoader.load(resource);
+        FXMLLoader fxmlLoader = new FXMLLoader(resource);
+        AnchorPane container = fxmlLoader.load();
         primaryStage.setScene(new Scene(container));
-        MainViewController controller = fxmlLoader.getController();
+        MainViewController controller = fxmlLoader.getController(); //getting the controller of main view
+
+        controller.window = primaryStage; // assigning the created stage to window variable in Main Controller
         primaryStage.show();
         primaryStage.centerOnScreen();
-//        primaryStage.setOnCloseRequest(event -> {
-//            if (controller.getWindowTitle().startsWith("*")) {
-//                event.consume();
-//                controller.displayClosingAlert();
-//            }
-//        });
+        primaryStage.setOnCloseRequest(event -> {
+            if (controller.getWindowTitle().startsWith("*")) { // if there is unsaved data
+                event.consume();
+                controller.displayClosingAlert(); // display closing alert to the user
+            }
+        });
     }
 }

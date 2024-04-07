@@ -31,7 +31,7 @@ public class MainViewController {
     private File openedFile = null;
     //String originalText = null;
 
-    private Stage window;
+    public Stage window;
 
 //    public void setWindow(Stage window) {
 //        this.window = window;
@@ -81,12 +81,23 @@ public class MainViewController {
         Stage newWindowStage = new Stage();
 
         URL resource = getClass().getResource("/view/MainView.fxml");
-        AnchorPane container = FXMLLoader.load(resource);
+        FXMLLoader fxmlLoader = new FXMLLoader(resource);
+        AnchorPane container = fxmlLoader.load();
+        MainViewController controller = fxmlLoader.getController();
+        controller.window = newWindowStage;
+
         Scene aboutScene = new Scene(container);
         newWindowStage.setScene(aboutScene);
         newWindowStage.setTitle("Untitled Document " + ++untitledDocumentCount);
         newWindowStage.centerOnScreen();
         newWindowStage.show();
+
+        newWindowStage.setOnCloseRequest(event -> {
+            if (controller.getWindowTitle().startsWith("*")) { // if there is unsaved data
+                event.consume();
+                controller.displayClosingAlert(); // display closing alert to the user
+            }
+        });
     }
 
     private String getTitle() {
@@ -110,36 +121,33 @@ public class MainViewController {
         File file = fileChooser.showOpenDialog(root.getScene().getWindow());// as a modal window
 
         if (file != null) {
-            if ((openedFile != null && !openedFile.equals(file)) || (openedFile == null && getTitle().startsWith("*"))) { // if already opened a file here
+            if ((openedFile != null && !openedFile.equals(file)) || (openedFile == null && getTitle().startsWith("*"))) { // if already opened a file here or started to edit in empty text area
                 Stage newStage = new Stage();
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/MainView.fxml"));
                 AnchorPane container = fxmlLoader.load();
                 newStage.setScene(new Scene(container));
                 newStage.show();
                 MainViewController controller = fxmlLoader.getController();
-                System.out.println(controller);
+
+                // to assign on close alert
+                controller.window = newStage;
+                newStage.setOnCloseRequest(event -> {
+                    if (controller.getWindowTitle().startsWith("*")) { // if there is unsaved data
+                        event.consume();
+                        controller.displayClosingAlert(); // display closing alert to the user
+                    }
+                });
 
                 if (controller != null) controller.loadTextToTextArea(file);
-//                String text = "";
-//                try (FileInputStream fis = new FileInputStream(file)) {
-//                    while (true) {
-//                        int read = fis.read();
-//                        if (read == -1) break;
-//                        text += (char) read;
-//                    }
-//                }
-//
-//                txtArea.setText(text);
+
 
             } else {
                 loadTextToTextArea(file);
                 openedFile = file;
                 setTitle(openedFile.getName());
             }
-            //((Stage) root.getScene().getWindow()).setTitle(openedFile.getName());
         } else if (openedFile == null) {
             setTitle("Untitled Document");
-            //((Stage) root.getScene().getWindow()).setTitle("Untitled Document 1");
         }
     }
 
@@ -153,7 +161,6 @@ public class MainViewController {
             }
         }
         txtArea.setText(text);
-        // originalText = text;
         setTitle(file.getName()); // change the window title
         openedFile = file;
     }
@@ -171,7 +178,6 @@ public class MainViewController {
         }
         openedFile = file;
         setTitle(openedFile.getName());
-        //((Stage) root.getScene().getWindow()).setTitle(openedFile.getName());
     }
 
     public void mnItemSaveOnAction(ActionEvent actionEvent) throws IOException {
@@ -204,7 +210,6 @@ public class MainViewController {
         txtArea.requestFocus();
         setTitle("Untitled Document 1");
         openedFile = null;
-        //originalText = null;
     }
 
     private void saveOnClosing() {
