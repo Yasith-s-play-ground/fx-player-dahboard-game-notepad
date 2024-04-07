@@ -205,23 +205,16 @@ public class MainViewController {
         if (!window.getTitle().startsWith("*")) window.setTitle("*" + window.getTitle());
     }
 
-    public void mnItemNewOnAction(ActionEvent actionEvent) {
-        txtArea.clear();
-        txtArea.requestFocus();
-        setTitle("Untitled Document 1");
-        openedFile = null;
+    public void mnItemNewOnAction(ActionEvent actionEvent) throws IOException {
+        if (!getTitle().startsWith("*")) {
+            txtArea.clear();
+            txtArea.requestFocus();
+            setTitle("Untitled Document 1");
+            openedFile = null;
+        } else {
+            mnItmNewWindowOnAction(new ActionEvent());
+        }
     }
-
-//    private void saveOnClosing() {
-//        window.setOnCloseRequest(event -> {
-//            if (getWindowTitle().startsWith("*")) { // if there is unsaved data
-//                event.consume();
-//                displayClosingAlert(); // display closing alert to the user
-//            } else {
-//                window.close();
-//            }
-//        });
-//    }
 
     public void mnItemExitOnAction(ActionEvent actionEvent) {
         if (getWindowTitle().startsWith("*")) { // if there is unsaved data
