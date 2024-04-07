@@ -89,6 +89,11 @@ public class MainViewController {
         newWindowStage.show();
     }
 
+    private String getTitle() {
+        return ((Stage) root.getScene().getWindow()).getTitle();
+
+    }
+
     private void setTitle(String title) {
         ((Stage) root.getScene().getWindow()).setTitle(title);
     }
@@ -105,7 +110,7 @@ public class MainViewController {
         File file = fileChooser.showOpenDialog(root.getScene().getWindow());// as a modal window
 
         if (file != null) {
-            if (openedFile != null && !openedFile.equals(file)) { // if already opened a file here
+            if ((openedFile != null && !openedFile.equals(file)) || (openedFile == null && getTitle().startsWith("*"))) { // if already opened a file here
                 Stage newStage = new Stage();
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/MainView.fxml"));
                 AnchorPane container = fxmlLoader.load();
