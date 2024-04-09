@@ -2,12 +2,12 @@ package lk.ijse.dep12.fx.note_pad.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.print.PrinterJob;
+import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -27,11 +27,17 @@ public class MainViewController {
     public TextArea txtArea;
     public MenuItem mnItemSaveAs;
     public MenuItem mnItemNew;
+    public MenuItem mnItemExit;
+    public MenuItem mnItemPrint;
+    public Label lblColRow;
     //private File file = null;
     private File openedFile = null;
     //String originalText = null;
 
     public Stage window;
+
+    private int currentRow = 0;
+    private int currentColumn = 0;
 
 //    public void setWindow(Stage window) {
 //        this.window = window;
@@ -203,6 +209,21 @@ public class MainViewController {
     public void txtAreaOnKeyReleased(KeyEvent keyEvent) {
         Stage window = ((Stage) root.getScene().getWindow());
         if (!window.getTitle().startsWith("*")) window.setTitle("*" + window.getTitle());
+
+        getCurrentLineAndColumn();
+    }
+
+    private void getCurrentLineAndColumn() {
+        String[] lines = (txtArea.getText().substring(0, txtArea.getCaretPosition())).split("\n");
+        currentRow = lines.length;
+        if (txtArea.getCaretPosition() != 0 && (txtArea.getText().charAt(txtArea.getCaretPosition() - 1)) == '\n') { // if cursor is just after a new line
+            currentRow++; //line must be next line
+            currentColumn = 0; // column must be 0
+        } else {
+            currentColumn = lines[lines.length - 1].length(); // if not just after new line, column = length of line
+        }
+
+        lblColRow.setText("ln " + currentRow + ", Col " + currentColumn); // setting values to status label
     }
 
     public void mnItemNewOnAction(ActionEvent actionEvent) throws IOException {
@@ -223,5 +244,21 @@ public class MainViewController {
             window.close();
         }
 
+    }
+
+    public void mnItemPrintOnAction(ActionEvent actionEvent) {
+        PrinterJob job = PrinterJob.createPrinterJob();
+        Node node = txtArea;
+        if (job != null && job.showPrintDialog(window)) {
+            boolean success = job.printPage(node);
+            if (success) {
+                job.endJob();
+            }
+        }
+
+    }
+
+    public void txtAreaOnMouseClicked(MouseEvent mouseEvent) {
+        getCurrentLineAndColumn();
     }
 }

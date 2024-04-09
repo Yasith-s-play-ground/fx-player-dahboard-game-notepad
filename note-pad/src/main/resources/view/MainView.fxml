@@ -44,7 +44,7 @@
                   </MenuItem>
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" text="Page Setup..." />
-                  <MenuItem mnemonicParsing="false" text="Print">
+                  <MenuItem fx:id="mnItemPrint" mnemonicParsing="false" onAction="#mnItemPrintOnAction" text="Print">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="P" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
@@ -165,7 +165,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TextArea fx:id="txtArea" layoutY="28.0" onKeyReleased="#txtAreaOnKeyReleased" prefHeight="571.0" prefWidth="800.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0" />
+      <TextArea fx:id="txtArea" layoutY="28.0" onKeyReleased="#txtAreaOnKeyReleased" onMouseClicked="#txtAreaOnMouseClicked" prefHeight="571.0" prefWidth="800.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0" />
       <AnchorPane layoutY="648.0" prefHeight="27.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
             <AnchorPane prefHeight="27.0" prefWidth="400.0" AnchorPane.rightAnchor="0.0">
@@ -175,7 +175,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label contentDisplay="CENTER" layoutY="14.0" prefWidth="120.0" text="Ln 1, Col 1" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="280.0">
+                  <Label fx:id="lblColRow" contentDisplay="CENTER" layoutY="14.0" prefWidth="120.0" text="Ln 1, Col 1" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="280.0">
                      <font>
                         <Font size="14.0" />
                      </font>
