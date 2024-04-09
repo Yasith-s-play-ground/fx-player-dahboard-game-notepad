@@ -55,28 +55,28 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-                  <MenuItem mnemonicParsing="false" text="Undo">
+                  <MenuItem fx:id="mnItemUndo" mnemonicParsing="false" onAction="#mnItemUndoOnAction" text="Undo">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
                   <SeparatorMenuItem mnemonicParsing="false" />
-              <MenuItem mnemonicParsing="false" text="Cut">
+              <MenuItem mnemonicParsing="false" onAction="#mnItemCutOnAction" text="Cut">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
-                  <MenuItem mnemonicParsing="false" text="Copy">
+                  <MenuItem mnemonicParsing="false" onAction="#mnItemCopyOnAction" text="Copy">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="C" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
-                  <MenuItem mnemonicParsing="false" text="Paste">
+                  <MenuItem mnemonicParsing="false" onAction="#mnItemPasteOnAction" text="Paste">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="V" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
-                  <MenuItem mnemonicParsing="false" text="Delete" />
+                  <MenuItem mnemonicParsing="false" onAction="#mnItemDeleteOnAction" text="Delete" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" text="Search with Bing...">
                      <accelerator>
@@ -109,7 +109,7 @@
                      </accelerator>
                   </MenuItem>
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Select All">
+                  <MenuItem mnemonicParsing="false" onAction="#mnItemSelectAllOnAction" text="Select All">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="A" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>

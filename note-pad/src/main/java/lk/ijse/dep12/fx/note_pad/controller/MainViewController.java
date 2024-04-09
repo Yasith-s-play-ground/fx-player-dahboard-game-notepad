@@ -6,6 +6,7 @@ import javafx.print.PrinterJob;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -15,6 +16,8 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 
 public class MainViewController {
@@ -30,6 +33,7 @@ public class MainViewController {
     public MenuItem mnItemExit;
     public MenuItem mnItemPrint;
     public Label lblColRow;
+    public MenuItem mnItemUndo;
     //private File file = null;
     private File openedFile = null;
     //String originalText = null;
@@ -210,7 +214,15 @@ public class MainViewController {
         Stage window = ((Stage) root.getScene().getWindow());
         if (!window.getTitle().startsWith("*")) window.setTitle("*" + window.getTitle());
 
-        getCurrentLineAndColumn();
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            currentRow++; //line must be next line
+            currentColumn = 1; // column must be 1
+            lblColRow.setText("ln " + currentRow + ", Col " + currentColumn); // setting values to status label
+
+        } else {
+            getCurrentLineAndColumn();
+
+        }
     }
 
     private void getCurrentLineAndColumn() {
@@ -218,7 +230,7 @@ public class MainViewController {
         currentRow = lines.length;
         if (txtArea.getCaretPosition() != 0 && (txtArea.getText().charAt(txtArea.getCaretPosition() - 1)) == '\n') { // if cursor is just after a new line
             currentRow++; //line must be next line
-            currentColumn = 0; // column must be 0
+            currentColumn = 1; // column must be 1
         } else {
             currentColumn = lines[lines.length - 1].length(); // if not just after new line, column = length of line
         }
@@ -235,6 +247,7 @@ public class MainViewController {
         } else {
             mnItmNewWindowOnAction(new ActionEvent());
         }
+
     }
 
     public void mnItemExitOnAction(ActionEvent actionEvent) {
@@ -260,5 +273,29 @@ public class MainViewController {
 
     public void txtAreaOnMouseClicked(MouseEvent mouseEvent) {
         getCurrentLineAndColumn();
+    }
+
+    public void mnItemUndoOnAction(ActionEvent actionEvent) {
+        txtArea.undo();
+    }
+
+    public void mnItemCutOnAction(ActionEvent actionEvent) {
+        txtArea.cut();
+    }
+
+    public void mnItemCopyOnAction(ActionEvent actionEvent) {
+        txtArea.copy();
+    }
+
+    public void mnItemPasteOnAction(ActionEvent actionEvent) {
+        txtArea.paste();
+    }
+
+    public void mnItemDeleteOnAction(ActionEvent actionEvent) {
+        txtArea.deleteText(txtArea.getSelection());
+    }
+
+    public void mnItemSelectAllOnAction(ActionEvent actionEvent) {
+        txtArea.selectAll();
     }
 }
