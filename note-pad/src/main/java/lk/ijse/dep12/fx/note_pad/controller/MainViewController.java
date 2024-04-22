@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.URL;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
@@ -176,10 +177,12 @@ public class MainViewController {
     }
 
     private void saveTextFile(File file) throws IOException {
-//        if (!file.getName().endsWith(".txt")) {
-//            file = new File(file.getAbsolutePath(), ".txt");
-//        }
-//        if (!file.exists()) file.createNewFile();
+
+        if (!file.getName().endsWith(".txt")) {
+            File tempFile = new File(file.getAbsolutePath() + ".txt");
+            if (file.exists()) file.delete();
+            file = tempFile;
+        }
         try (FileOutputStream fos = new FileOutputStream(file)) {
             char[] charArray = txtArea.getText().toCharArray();
             for (char c : charArray) {
@@ -206,6 +209,9 @@ public class MainViewController {
         fileChooser.setInitialDirectory(new File(System.getenv("HOME"), "Desktop"));
         File file = fileChooser.showSaveDialog(root.getScene().getWindow());
         if (file != null) {
+//            if (!file.getName().endsWith(".txt")){
+//                File tempFile=file.renameTo()
+//            }
             saveTextFile(file);
         }
     }
