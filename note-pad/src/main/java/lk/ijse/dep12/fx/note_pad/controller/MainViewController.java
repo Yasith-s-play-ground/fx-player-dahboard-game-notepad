@@ -35,6 +35,7 @@ public class MainViewController {
     public MenuItem mnItemPrint;
     public Label lblColRow;
     public MenuItem mnItemUndo;
+    public MenuItem mnItemFind;
     //private File file = null;
     private File openedFile = null;
     //String originalText = null;
@@ -303,5 +304,32 @@ public class MainViewController {
 
     public void mnItemSelectAllOnAction(ActionEvent actionEvent) {
         txtArea.selectAll();
+    }
+
+    public void mnItemFindOnAction(ActionEvent actionEvent) {
+        Stage findStage = new Stage();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/FindView.fxml"));
+            AnchorPane root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            findStage.setScene(scene);
+            FindViewController controller = fxmlLoader.getController();
+            controller.initData(this);
+            controller.setTextToFind(txtArea.getText());
+            findStage.setTitle("Find");
+            findStage.show();
+            findStage.centerOnScreen();
+            findStage.setResizable(false);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void selectTheFoundText(int startIndex, int endIndex) {
+        txtArea.selectRange(startIndex, endIndex);
+    }
+
+    public String getTextFromTextArea() {
+        return txtArea.getText();
     }
 }

@@ -83,7 +83,7 @@
                         <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
-                  <MenuItem mnemonicParsing="false" text="Find...">
+                  <MenuItem fx:id="mnItemFind" mnemonicParsing="false" onAction="#mnItemFindOnAction" text="Find...">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="F" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
