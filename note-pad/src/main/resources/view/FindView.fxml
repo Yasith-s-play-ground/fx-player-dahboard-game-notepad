@@ -15,7 +15,7 @@
       <Button fx:id="btnFindNext" layoutX="449.0" layoutY="38.0" mnemonicParsing="false" onAction="#btnFindNextOnAction" text="Find Next" />
       <Button fx:id="btnCancel" layoutX="449.0" layoutY="79.0" mnemonicParsing="false" onAction="#btnCancelOnAction" prefHeight="24.0" prefWidth="81.0" text="Cancel" />
       <Label layoutX="324.0" layoutY="103.0" prefHeight="24.0" prefWidth="81.0" text="Direction" />
-      <RadioButton fx:id="rdBtnUp" layoutX="324.0" layoutY="137.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="61.0" text="Up">
+      <RadioButton fx:id="rdBtnUp" layoutX="324.0" layoutY="137.0" mnemonicParsing="false" onAction="#rdBtnUpOnAction" prefHeight="18.0" prefWidth="61.0" text="Up">
          <toggleGroup>
             <ToggleGroup fx:id="rdBtnGroup" />
          </toggleGroup>

@@ -44,7 +44,6 @@ public class FindViewController {
     }
 
     public void btnCancelOnAction(ActionEvent event) {
-
     }
 
     public void btnFindNextOnAction(ActionEvent event) {
@@ -99,5 +98,9 @@ public class FindViewController {
 
     public void chkBoxMatchCaseOnAction(ActionEvent actionEvent) {
         compiled = false;
+    }
+
+    public void rdBtnUpOnAction(ActionEvent actionEvent) {
+        mainViewController.txtArea.positionCaret(0); // take the caret position to beginning
     }
 }
