@@ -1,47 +1,61 @@
 package lk.ijse.dep12.fx.note_pad.controller;
 
 import javafx.event.ActionEvent;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextField;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class FindViewController {
+public class FindAndReplaceViewController {
 
     public Button btnCancel;
 
     public Button btnFindNext;
 
+    public Button btnReplace;
+
+    public Button btnReplaceAll;
+
     public CheckBox chkBoxMatchCase;
 
     public CheckBox chkBoxWrapAround;
 
-    public RadioButton rdBtnDown;
-
-    public ToggleGroup rdBtnGroup;
-
-    public RadioButton rdBtnUp;
-
     public TextField txtFind;
 
+    public TextField txtReplace;
+
+    private boolean compiled;
     private MainViewController mainViewController;
     private String text;
-
     private String find = "";
     private Matcher matcher = null;
 
-    private boolean compiled;
 
     public void initialize() {
+        //disable find and replace buttons when the form is opening
         btnFindNext.setDisable(true);
+        btnReplaceAll.setDisable(true);
+        btnReplace.setDisable(true);
+
         txtFind.textProperty().addListener((observable, oldValue, newValue) -> {
             btnFindNext.setDisable(newValue.isBlank());
             if (!newValue.equals(oldValue))
                 compiled = false; // if the word has changed, have to compile the pattern again
         });
+
+        txtReplace.textProperty().addListener((observable, oldValue, newValue) -> {
+            btnReplace.setDisable(newValue.isBlank());
+            btnReplaceAll.setDisable(newValue.isBlank());
+        });
+
+
     }
 
     public void btnCancelOnAction(ActionEvent event) {
+
     }
 
     public void btnFindNextOnAction(ActionEvent event) {
@@ -81,6 +95,28 @@ public class FindViewController {
         }
     }
 
+    public void btnReplaceAllOnAction(ActionEvent event) {
+        if (!(txtReplace.getText().isEmpty() || txtFind.getText().isEmpty())) {
+            String newText = "";
+            if (chkBoxMatchCase.isSelected()) { // case matched
+                newText = mainViewController.txtArea.getText().replaceAll(txtFind.getText(), txtReplace.getText());
+            } else {
+                newText = mainViewController.txtArea.getText();
+                newText = newText.replaceAll("(?i)" + txtFind.getText(), txtReplace.getText());
+            }
+
+            mainViewController.txtArea.setText(newText);
+        }
+    }
+
+    public void btnReplaceOnAction(ActionEvent event) {
+        //mainViewController.txtArea.getText().replace(txtReplace.getText());
+    }
+
+    public void chkBoxMatchCaseOnAction(ActionEvent event) {
+        compiled = false;
+    }
+
     public void initData(MainViewController mainViewController) {
         this.mainViewController = mainViewController;
         //if cursor was at the end of end when opening find window, move the cursor to beginning of text
@@ -91,14 +127,5 @@ public class FindViewController {
 
     public void setTextToFind(String text) {
         this.text = text;
-    }
-
-
-    public void chkBoxMatchCaseOnAction(ActionEvent actionEvent) {
-        compiled = false;
-    }
-
-    public void rdBtnUpOnAction(ActionEvent actionEvent) {
-        mainViewController.txtArea.positionCaret(0); // take the caret position to beginning
     }
 }

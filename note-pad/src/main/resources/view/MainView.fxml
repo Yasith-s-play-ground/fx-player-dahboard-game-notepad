@@ -98,7 +98,7 @@
                         <KeyCodeCombination alt="UP" code="F3" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
-                  <MenuItem mnemonicParsing="false" text="Replace...">
+                  <MenuItem fx:id="mnItemReplace" mnemonicParsing="false" onAction="#mnItemReplaceOnAction" text="Replace...">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="H" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>

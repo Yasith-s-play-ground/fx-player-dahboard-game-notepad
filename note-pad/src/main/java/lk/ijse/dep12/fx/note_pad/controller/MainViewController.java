@@ -332,4 +332,23 @@ public class MainViewController {
     public String getTextFromTextArea() {
         return txtArea.getText();
     }
+
+    public void mnItemReplaceOnAction(ActionEvent actionEvent) {
+        Stage replaceStage = new Stage();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/FindAndReplaceView.fxml"));
+            AnchorPane root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            replaceStage.setScene(scene);
+            FindAndReplaceViewController controller = fxmlLoader.getController();
+            controller.initData(this);
+            controller.setTextToFind(txtArea.getText());
+            replaceStage.setTitle("Find and Replace");
+            replaceStage.show();
+            replaceStage.centerOnScreen();
+            replaceStage.setResizable(false);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
