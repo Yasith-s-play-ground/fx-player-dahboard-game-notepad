@@ -30,7 +30,7 @@ public class FindViewController {
     private String find = "";
     private Pattern pattern = null;
     private Matcher matcher = null;
-    private int caretPosition = 0;
+    private int caretPosition = -1;
 
     private boolean compiled;
 
@@ -38,7 +38,8 @@ public class FindViewController {
         btnFindNext.setDisable(true);
         txtFind.textProperty().addListener((observable, oldValue, newValue) -> {
             btnFindNext.setDisable(newValue.isBlank());
-            compiled = false; // word changed
+            if (!newValue.equals(oldValue))
+                compiled = false; // if the word has changed, have to compile the pattern again
         });
     }
 
@@ -51,16 +52,16 @@ public class FindViewController {
             caretPosition = mainViewController.txtArea.getCaretPosition(); // get the current caret position in notepad text area
 
             System.out.println("compiled = " + compiled);
-            if (!compiled) { //if text or radio button selection changed
+            if (!compiled) { //if text or check box selection changed
                 find = txtFind.getText();
+                text = mainViewController.getTextFromTextArea();
 
                 if (!chkBoxMatchCase.isSelected()) {
                     System.out.println("don't check case");
                     find = find.toLowerCase(); // change case of find text to lowercase
                     text = text.toLowerCase(); // change case of text taken from text area to lowercase
-                } else {
-                    System.out.println("check case");
                 }
+                //System.out.println("find is " + find + " text is " + text);
 
                 pattern = Pattern.compile(find);
                 matcher = pattern.matcher(text);
@@ -68,13 +69,18 @@ public class FindViewController {
             }
 
             if (matcher.find(caretPosition)) {
-                System.out.println("finding next index of word");
+                //System.out.println("finding next index of word");
                 int startIndex = matcher.start();
                 int endIndex = matcher.end();
-                System.out.printf("Start Index: %d, End Index: %d", startIndex, endIndex);
-                mainViewController.selectTheFoundText(startIndex, endIndex);
-                caretPosition = endIndex;
-            } else new Alert(Alert.AlertType.INFORMATION, "Cannot find text '" + find + "'").show();
+                //System.out.printf("Start Index: %d, End Index: %d", startIndex, endIndex);
+                mainViewController.selectTheFoundText(startIndex, endIndex); // highlight matching text
+                mainViewController.txtArea.selectPositionCaret(endIndex); // change caret position in text area
+            } else if (!chkBoxWrapAround.isSelected()) { // if search is not wrapped around
+                new Alert(Alert.AlertType.INFORMATION, "Cannot find text '" + find + "'").show();
+            } else if (chkBoxWrapAround.isSelected()) { // if search is wrapped around
+                mainViewController.txtArea.selectPositionCaret(0);
+                mainViewController.txtArea.deselect();
+            }
         }
     }
 
@@ -87,4 +93,7 @@ public class FindViewController {
     }
 
 
+    public void chkBoxMatchCaseOnAction(ActionEvent actionEvent) {
+        compiled = false;
+    }
 }

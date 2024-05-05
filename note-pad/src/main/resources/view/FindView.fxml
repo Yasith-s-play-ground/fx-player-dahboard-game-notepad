@@ -8,7 +8,6 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="262.0" prefWidth="583.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.dep12.fx.note_pad.controller.FindViewController">
    <children>
       <Label layoutX="63.0" layoutY="38.0" prefHeight="24.0" prefWidth="81.0" text="Find What :" />
@@ -22,7 +21,7 @@
          </toggleGroup>
       </RadioButton>
       <RadioButton fx:id="rdBtnDown" layoutX="405.0" layoutY="137.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="61.0" selected="true" text="Down" toggleGroup="$rdBtnGroup" />
-      <CheckBox fx:id="chkBoxMatchCase" layoutX="63.0" layoutY="168.0" mnemonicParsing="false" text="Match Case" />
+      <CheckBox fx:id="chkBoxMatchCase" layoutX="63.0" layoutY="168.0" mnemonicParsing="false" onAction="#chkBoxMatchCaseOnAction" text="Match Case" />
       <CheckBox fx:id="chkBoxWrapAround" layoutX="63.0" layoutY="204.0" mnemonicParsing="false" text="Wrap Around" />
    </children>
 </AnchorPane>
