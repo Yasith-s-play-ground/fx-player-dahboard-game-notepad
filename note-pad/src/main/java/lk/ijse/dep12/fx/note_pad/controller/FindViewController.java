@@ -78,14 +78,18 @@ public class FindViewController {
             } else if (!chkBoxWrapAround.isSelected()) { // if search is not wrapped around
                 new Alert(Alert.AlertType.INFORMATION, "Cannot find text '" + find + "'").show();
             } else if (chkBoxWrapAround.isSelected()) { // if search is wrapped around
-                mainViewController.txtArea.selectPositionCaret(0);
-                mainViewController.txtArea.deselect();
+                mainViewController.txtArea.positionCaret(0);
+                //mainViewController.txtArea.deselect();
             }
         }
     }
 
     public void initData(MainViewController mainViewController) {
         this.mainViewController = mainViewController;
+        //if cursor was at the end of end when opening find window, move the cursor to beginning of text
+        if (mainViewController.txtArea.getCaretPosition() == mainViewController.getTextFromTextArea().length()) {
+            mainViewController.txtArea.positionCaret(0);
+        }
     }
 
     public void setTextToFind(String text) {
